@@ -1,5 +1,6 @@
 import logging
 from tasks.abstract_task import AbstractTask
+from workflow.service_metadata import ServiceMetadata
 
 
 class Step:
@@ -8,6 +9,6 @@ class Step:
         self._name = name
         self._task = task
 
-    def run(self):
+    def run(self, service_metadata: ServiceMetadata):
         logging.info(f"Running step ${self._name}")
-        self._task.execute()
+        self._task.execute(service_metadata)

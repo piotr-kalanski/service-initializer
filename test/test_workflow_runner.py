@@ -3,6 +3,7 @@ from workflow.configuration.workflow_configuration import WorkflowConfiguration
 from workflow.step import Step
 from workflow.runner import WorkflowRunner
 from dummy_task import DummyTask
+from workflow.service_metadata import ServiceMetadata
 
 
 class TestWorkflowExecutor(unittest.TestCase):
@@ -12,7 +13,7 @@ class TestWorkflowExecutor(unittest.TestCase):
     def setUp(self):
         self.workflow_runner = WorkflowRunner()
 
-    def test_execute_workflow(self):
+    def test_run_workflow(self):
         workflow_configuration = WorkflowConfiguration()
         t1 = DummyTask()
         t2 = DummyTask()
@@ -21,7 +22,17 @@ class TestWorkflowExecutor(unittest.TestCase):
         workflow_configuration.add_step(s1)
         workflow_configuration.add_step(s2)
 
-        self.workflow_runner.run(workflow_configuration)
+        metadata = ServiceMetadata(
+            name="name",
+            description="description",
+            parameters={
+                "key": "value"
+            }
+        )
+
+        self.workflow_runner.run(workflow_configuration, metadata)
 
         self.assertTrue(t1.executed)
+        self.assertEquals(t1.service_metadata, metadata)
         self.assertTrue(t2.executed)
+        self.assertEquals(t2.service_metadata, metadata)
