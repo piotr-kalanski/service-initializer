@@ -1,4 +1,4 @@
-from tasks.task import Task
+from tasks.abstract_task import AbstractTask
 
 
 class Step:

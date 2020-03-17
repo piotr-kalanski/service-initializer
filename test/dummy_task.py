@@ -1,5 +1,5 @@
-from tasks.task import Task
+from tasks.abstract_task import AbstractTask
 
 
-class DummyTask(Task):
+class DummyTask(AbstractTask):
     ...
