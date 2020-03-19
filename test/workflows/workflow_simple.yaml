@@ -1,16 +1,13 @@
 steps:
   - name: Step1
     task:
-      type: Echo
-      parameters:
-        - key: value
+      type: AWS/CodeCommit/CreateRepository
   - name: Step2
     task:
-      type: Echo
-      parameters:
-        - key: value
+      type: AWS/CodePipeline/CreatePipeline
   - name: Step3
     task:
-      type: Echo
-      parameters:
-        - key: value
+      type: AWS/ECR/CreateRepository
+  - name: Step4
+    task:
+      type: git/PushToRepository
