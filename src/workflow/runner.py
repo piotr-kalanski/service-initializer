@@ -1,6 +1,6 @@
 import logging
 from workflow.configuration.workflow_configuration import WorkflowConfiguration
-from workflow.service_metadata import ServiceMetadata
+from service_metadata.model import ServiceMetadata
 
 
 class WorkflowRunner:

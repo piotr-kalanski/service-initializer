@@ -1,5 +1,5 @@
 from tasks.abstract_task import AbstractTask
-from workflow.service_metadata import ServiceMetadata
+from service_metadata.model import ServiceMetadata
 
 # TODO - implementation - this is only template
 class Git_PushToRepository_Task(AbstractTask):

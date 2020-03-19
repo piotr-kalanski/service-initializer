@@ -3,7 +3,7 @@ from workflow.configuration.workflow_configuration import WorkflowConfiguration
 from workflow.step import Step
 from workflow.runner import WorkflowRunner
 from dummy_task import DummyTask
-from workflow.service_metadata import ServiceMetadata
+from service_metadata.model import ServiceMetadata
 
 
 class TestWorkflowExecutor(unittest.TestCase):

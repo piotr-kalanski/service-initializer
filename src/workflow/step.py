@@ -1,6 +1,6 @@
 import logging
 from tasks.abstract_task import AbstractTask
-from workflow.service_metadata import ServiceMetadata
+from service_metadata.model import ServiceMetadata
 
 
 class Step:

@@ -1,7 +1,7 @@
 
 from abc import ABC
 from abc import abstractmethod
-from workflow.service_metadata import ServiceMetadata
+from service_metadata.model import ServiceMetadata
 
 
 class AbstractTask:
