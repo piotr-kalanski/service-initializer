@@ -1,0 +1,16 @@
+steps:
+  - name: Step1
+    task:
+      type: Echo
+      parameters:
+        - key: value
+  - name: Step2
+    task:
+      type: Echo
+      parameters:
+        - key: value
+  - name: Step3
+    task:
+      type: Echo
+      parameters:
+        - key: value

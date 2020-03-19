@@ -6,9 +6,9 @@ from workflow.service_metadata import ServiceMetadata
 class Step:
 
     def __init__(self, name: str, task: AbstractTask):
-        self._name = name
-        self._task = task
+        self.name = name
+        self.task = task
 
     def run(self, service_metadata: ServiceMetadata):
-        logging.info(f"Running step ${self._name}")
-        self._task.execute(service_metadata)
+        logging.info(f"Running step ${self.name}")
+        self.task.execute(service_metadata)
