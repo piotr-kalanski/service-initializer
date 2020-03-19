@@ -1,3 +1,4 @@
+import logging
 from tasks.abstract_task import AbstractTask
 from service_metadata.model import ServiceMetadata
 
@@ -8,4 +9,5 @@ class AWS_CodePipeline_CreatePipeline_Task(AbstractTask):
         
 
     def execute(self, service_metadata: ServiceMetadata):
-        pass # TODO - implementation
+        logging.info("Creating AWS Code Pipeline pipeline")
+        # TODO - implementation

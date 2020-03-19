@@ -10,5 +10,5 @@ class Step:
         self.task = task
 
     def run(self, service_metadata: ServiceMetadata):
-        logging.info(f"Running step ${self.name}")
+        logging.info(f"Running step {self.name}")
         self.task.execute(service_metadata)

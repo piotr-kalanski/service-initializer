@@ -18,7 +18,7 @@ class WorkflowConfigurationReader:
     }
 
     def read(self, file: str) -> WorkflowConfiguration:
-        configuration_content = yaml.load(open(file))
+        configuration_content = yaml.load(open(file), Loader=yaml.FullLoader)
         wc = WorkflowConfiguration()
 
         for s in configuration_content['steps']:

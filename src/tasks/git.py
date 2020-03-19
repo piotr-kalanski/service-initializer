@@ -1,3 +1,4 @@
+import logging
 from tasks.abstract_task import AbstractTask
 from service_metadata.model import ServiceMetadata
 
@@ -8,4 +9,5 @@ class Git_PushToRepository_Task(AbstractTask):
         
 
     def execute(self, service_metadata: ServiceMetadata):
-        pass # TODO - implementation
+        logging.info("Pushing to git repository")
+        # TODO - implementation

@@ -6,7 +6,7 @@ from service_metadata.exceptions import MissingServiceNameException
 class ServiceMetadataReader:
 
     def read(self, file: str) -> ServiceMetadata:
-        file_content = yaml.load(open(file))
+        file_content = yaml.load(open(file), Loader=yaml.FullLoader)
 
         if not file_content or 'name' not in file_content:
             raise MissingServiceNameException()
