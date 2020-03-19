@@ -1,0 +1,8 @@
+steps:
+  - name: Generate project directory using cookiecutter
+    task:
+      type: Cookiecutter/GenerateProjectDirectory
+      parameters:
+        template_url_field_name: 'cookiecutter.template_url'
+        parameters_field_name: 'cookiecutter.parameters'
+        output_dir: 'dir1/dir2'

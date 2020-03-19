@@ -7,6 +7,7 @@ from tasks.aws.codecommit import *
 from tasks.aws.codepipeline import *
 from tasks.aws.ecr import *
 from tasks.git import Git_PushToRepository_Task
+from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 
 class WorkflowConfigurationReader:
 
@@ -16,6 +17,7 @@ class WorkflowConfigurationReader:
         "AWS/CodePipeline/CreatePipeline": AWS_CodePipeline_CreatePipeline_Task,
         "AWS/ECR/CreateRepository": AWS_ECR_CreateRepository_Task,
         "git/PushToRepository": Git_PushToRepository_Task,
+        'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
     }
 
     def read(self, file: str) -> WorkflowConfiguration:
@@ -24,14 +26,16 @@ class WorkflowConfigurationReader:
 
         for s in configuration_content['steps']:
             step_name = s['name']
-            task_type = s['task']['type']
+            task = s['task']
+            task_type = task['type']
+            task_parameters = task['parameters'] if 'parameters' in task else {}
 
             if task_type not in self.TASKS_CLASSES:
                 raise NotExistingTaskException()
 
             step = Step(
                 name=step_name,
-                task=self.TASKS_CLASSES[task_type]()
+                task=self.TASKS_CLASSES[task_type](**task_parameters)
             )
             wc.add_step(step)
 
