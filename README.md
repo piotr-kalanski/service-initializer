@@ -1,9 +1,10 @@
 # service-initializer
 
-Tool for initializing new service
+Tool for initializing new service (e.g. REST API, batch job).
 
 ## Table of contents
 
+- [Motivation](#motivation)
 - [Quick start](#quick-start)
 - [Concepts](#concepts)
     * [Task](#task)
@@ -15,6 +16,23 @@ Tool for initializing new service
     * [Run workflow](#run-workflow)
 - [Supported tasks](#supported-tasks)
 - [Add new task](#add-new-task)
+
+## Motivation
+
+When you start working on new Microservice you have to in each case do multiple repetitive and boring things like: create git repository, create basic directory structure in git repository, create CI/CD pipeline, create docker registry etc.
+
+Aim of Service Initializer is to automate such tasks so that you can start from implementing business logic.
+
+### Benefits
+
+Benefits of Service Initializer:
+- Reduce time spent on boring and repetitive tasks
+- Support microservice architecture in your organization by reducing overhead on creating new service
+- Increase standardization in your team/organization
+- Speed up induction process of new developer in your team
+- Technology and platform agnostic - you can use it to initialize any tech stack
+- Extensibility - it is relativly easy to add support for automating new type of tasks
+- Built in tasks ([see more](#supported-tasks))
 
 ## Quick start
 
@@ -108,7 +126,16 @@ Example:
 
 ## Supported tasks
 
-TODO
+### Create AWS Code Commit repository
+
+```yaml
+  steps:
+  - name: Step name
+    task:
+      type: AWS/CodeCommit/CreateRepository
+
+  [...]
+```
 
 ## Add new task
 
