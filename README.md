@@ -31,8 +31,9 @@ Benefits of Service Initializer:
 - Increase standardization in your team/organization
 - Speed up induction process of new developer in your team
 - Technology and platform agnostic - you can use it to initialize any tech stack
-- Extensibility - it is relativly easy to add support for automating new type of tasks
 - Built in tasks ([see more](#supported-tasks))
+- Extensibility - it is relativly easy to add support for automating new type of tasks ([see more](#add-new-task))
+
 
 ## Quick start
 
