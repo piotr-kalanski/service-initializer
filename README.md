@@ -4,21 +4,27 @@ Tool for initializing new service
 
 ## Table of contents
 
+- [Quick start](#quick-start)
 - [Concepts](#concepts)
     * [Task](#task)
     * [Step](#step)
     * [Workflow configuration](#workflow-configuration)
-    * [Service metadata](#service-metadata)
+    * [Service metadata](#service-metadata)    
 - [Architecture](#architecture)
 - [Command line](#command-line)
     * [Run workflow](#run-workflow)
 - [Supported tasks](#supported-tasks)
+- [Add new task](#add-new-task)
+
+## Quick start
+
+TODO
 
 ## Concepts
 
 ### Task
 
-Task is list of action (recipe) that needs to be executed.
+Task is list of actions (recipe) with desired outcome.
 
 Example tasks:
 - create git repository
@@ -32,12 +38,11 @@ Step is parameterized task with assigned name.
 
 ### Workflow configuration
 
-Workflow configuration it is list of steps to be executed to initialize new service.
-Each step has name and is related to executing specific task.
-
+Workflow configuration is list of steps to be executed in sequence to initialize new service.
+In other words it is recipe to initialize new service.
 Workflow configuration is provided in YAML format.
 
-#### Example
+#### Example workflow configuration file
 
 Example workflow configuration YAML file:
 
@@ -72,7 +77,7 @@ Service metadata schema:
 - description - service description
 - parameters - key value pairs
 
-#### Example file
+#### Example service metadata file
 
 ```yaml
 name: service
@@ -93,14 +98,65 @@ TODO
 
 ### Run workflow
 
-Command to run workflow.
+Command to initialize new service based on provided workflow and service metadata.
 
     python initialize_service.py --configuration PATH_TO_WORKFLOW_CONFIGURATION.yaml --parameters PATH_TO_SERVICE_METADATA.yaml
 
-Example usage:
+Example:
 
     python initialize_service.py --configuration workflow_simple.yaml --parameters service_metadata.yaml
 
 ## Supported tasks
 
 TODO
+
+## Add new task
+
+Required steps:
+1. Create new Python class
+2. Add mapping from expected task type name to Task class in [WorkflowConfigurationReader](!src/workflow/configuration/workflow_configuration_reader.py).
+
+### Create new Python class
+
+Create new Python class derived from *AbstractTask* class.
+
+You need to implement one method *execute* responsible for executing task.
+
+```python
+
+import logging
+from tasks.abstract_task import AbstractTask
+from service_metadata.model import ServiceMetadata
+
+class New_Task(AbstractTask):
+    
+    def execute(self, service_metadata: ServiceMetadata):
+        logging.info("Pushing to git repository")
+        # TODO - implementation
+```
+
+### Add mapping from expected task type name to Task class
+
+Add new mapping in [WorkflowConfigurationReader](!src/workflow/configuration/workflow_configuration_reader.py):
+
+```python
+
+class WorkflowConfigurationReader:
+    [...]
+    TASKS_CLASSES = {
+        [...],
+        "NewTask": New_Task,
+    }
+
+    [...]
+
+```
+
+where *NewTask* is used in workflow configuration file, example:
+
+```yaml
+steps:
+  - name: Step
+    task:
+      type: NewTask
+```
