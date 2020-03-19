@@ -9,6 +9,7 @@ from tasks.git import Git_PushToRepository_Task
 
 class WorkflowConfigurationReader:
 
+    # dictionary mapping task name used in YAML file with workflow configuration to Python for specific Task class
     TASKS_CLASSES = {
         "AWS/CodeCommit/CreateRepository": AWS_CodeCommit_CreateRepository_Task,
         "AWS/CodePipeline/CreatePipeline": AWS_CodePipeline_CreatePipeline_Task,
