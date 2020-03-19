@@ -1,6 +1,7 @@
 import yaml
 from workflow.configuration.workflow_configuration import WorkflowConfiguration
 from workflow.step import Step
+from workflow.configuration.exceptions import NotExistingTaskException
 
 from tasks.aws.codecommit import *
 from tasks.aws.codepipeline import *
@@ -24,6 +25,9 @@ class WorkflowConfigurationReader:
         for s in configuration_content['steps']:
             step_name = s['name']
             task_type = s['task']['type']
+
+            if task_type not in self.TASKS_CLASSES:
+                raise NotExistingTaskException()
 
             step = Step(
                 name=step_name,

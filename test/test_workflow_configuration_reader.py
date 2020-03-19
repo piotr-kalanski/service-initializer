@@ -1,5 +1,7 @@
 import unittest
+import pytest
 from workflow.configuration.workflow_configuration_reader import WorkflowConfigurationReader
+from workflow.configuration.exceptions import NotExistingTaskException
 
 from tasks.aws.codecommit import AWS_CodeCommit_CreateRepository_Task
 from tasks.aws.codepipeline import AWS_CodePipeline_CreatePipeline_Task
@@ -27,3 +29,7 @@ class TestWorkflowConfigurationReader(unittest.TestCase):
         self.assertEqual(AWS_CodePipeline_CreatePipeline_Task, steps[1].task.__class__)
         self.assertEqual(AWS_ECR_CreateRepository_Task, steps[2].task.__class__)
         self.assertEqual(Git_PushToRepository_Task, steps[3].task.__class__)
+
+    def test_read_workflow_with_not_existing_task(self):
+        with pytest.raises(NotExistingTaskException):
+            self.workflow_configuration_reader.read("test/workflows/workflow_with_not_existing_task.yaml")
