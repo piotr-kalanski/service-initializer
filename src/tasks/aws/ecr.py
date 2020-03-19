@@ -1,8 +1,9 @@
 import logging
+import boto3
 from tasks.abstract_task import AbstractTask
 from service_metadata.model import ServiceMetadata
 
-# TODO - implementation - this is only template
+
 class AWS_ECR_CreateRepository_Task(AbstractTask):
     
 #    def __init__(self):
@@ -10,4 +11,10 @@ class AWS_ECR_CreateRepository_Task(AbstractTask):
 
     def execute(self, service_metadata: ServiceMetadata):
         logging.info("Creating AWS ECR repository")
-        # TODO - implementation
+        client = boto3.client('ecr')
+        repository_name = service_metadata.name
+        # based on: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.create_repository
+        response = client.create_repository(
+            repositoryName=repository_name,
+        )
+        logging.info(f"AWS ECR repository '{repository_name}' created")
