@@ -138,6 +138,17 @@ Example:
   [...]
 ```
 
+### Create ECR repository
+
+```yaml
+  steps:
+  - name: Step name
+    task:
+      type: AWS/ECR/CreateRepository
+
+  [...]
+```
+
 ## Add new task
 
 Required steps:
