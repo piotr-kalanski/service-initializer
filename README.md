@@ -114,7 +114,7 @@ TODO
 
 Required steps:
 1. Create new Python class
-2. Add mapping from expected task type name to Task class in [WorkflowConfigurationReader](!src/workflow/configuration/workflow_configuration_reader.py).
+2. Add mapping from expected task type name to Task class in [WorkflowConfigurationReader](./src/workflow/configuration/workflow_configuration_reader.py).
 
 ### Create new Python class
 
@@ -137,7 +137,7 @@ class New_Task(AbstractTask):
 
 ### Add mapping from expected task type name to Task class
 
-Add new mapping in [WorkflowConfigurationReader](!src/workflow/configuration/workflow_configuration_reader.py):
+Add new mapping in [WorkflowConfigurationReader](./src/workflow/configuration/workflow_configuration_reader.py):
 
 ```python
 
