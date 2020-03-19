@@ -1,0 +1,8 @@
+name: service
+description: service description
+parameters:
+  param1: value1
+  param2: value2
+  param3:
+    field1: 1
+    field2: f2
