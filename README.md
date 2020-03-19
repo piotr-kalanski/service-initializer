@@ -149,6 +149,29 @@ Example:
   [...]
 ```
 
+### Generate project directory using cookiecutter template
+
+Example:
+
+```yaml
+steps:
+  - name: Generate project directory using cookiecutter
+    task:
+      type: Cookiecutter/GenerateProjectDirectory
+      parameters:
+        template_url_field_name: 'cookiecutter.template_url'
+        parameters_field_name: 'cookiecutter.parameters'
+        output_dir: 'dir1/dir2'
+
+  [...]
+```
+
+#### Parameters:
+
+- template_url_field_name: name of field in Service Metadata with url to cookiecutter template
+- parameters_field_name: name of field in Service Metadata with input parameters for cookiecutter template
+- output_dir: output directory where to generate project template
+
 ## Add new task
 
 Required steps:
