@@ -1,3 +1,4 @@
+import logging
 from cookiecutter.main import cookiecutter
 from tasks.abstract_task import AbstractTask
 from service_metadata.model import ServiceMetadata
