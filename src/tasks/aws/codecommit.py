@@ -15,5 +15,5 @@ class AWS_CodeCommit_CreateRepository_Task(AbstractTask):
             repositoryName=service_metadata.name,
             repositoryDescription=service_metadata.description
         )
-        repository_name = response['repositoryName']
+        repository_name = response['repositoryMetadata']['repositoryName']
         logging.info(f"AWS Code Commit repository '{repository_name}' created")
