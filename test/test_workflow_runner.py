@@ -33,6 +33,6 @@ class TestWorkflowExecutor(unittest.TestCase):
         self.workflow_runner.run(workflow_configuration, metadata)
 
         self.assertTrue(t1.executed)
-        self.assertEquals(t1.service_metadata, metadata)
+        self.assertEqual(t1.service_metadata, metadata)
         self.assertTrue(t2.executed)
-        self.assertEquals(t2.service_metadata, metadata)
+        self.assertEqual(t2.service_metadata, metadata)

@@ -6,6 +6,7 @@ from workflow.configuration.exceptions import NotExistingTaskException
 from tasks.aws.codecommit import *
 from tasks.aws.codepipeline import *
 from tasks.aws.ecr import *
+from tasks.aws.cloudformation import *
 from tasks.git import Git_PushToRepository_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 
@@ -16,6 +17,7 @@ class WorkflowConfigurationReader:
         "AWS/CodeCommit/CreateRepository": AWS_CodeCommit_CreateRepository_Task,
         "AWS/CodePipeline/CreatePipeline": AWS_CodePipeline_CreatePipeline_Task,
         "AWS/ECR/CreateRepository": AWS_ECR_CreateRepository_Task,
+        "AWS/CloudFormation/CreateStack": AWS_CloudFormation_CreateStack_Task,
         "git/PushToRepository": Git_PushToRepository_Task,
         'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
     }
