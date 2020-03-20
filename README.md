@@ -149,6 +149,38 @@ Example:
   [...]
 ```
 
+### Create AWS CloudFormation stack
+
+Example:
+
+```yaml
+  steps:
+  - name: step
+    task:
+      type: AWS/CloudFormation/CreateStack
+      parameters:
+        template_body: >
+          Resources:
+            S3Bucket:
+              Type: AWS::S3::Bucket
+              DeletionPolicy: Retain
+              Properties:
+                BucketName: my-bucket
+        service_metadata_parameter_with_stack_name: cf_stack_name
+        service_metadata_parameter_with_stack_parameters: cf_stack_parameters
+        stack_parameters:
+          p1: v1
+          p2: v2
+  [...]
+```
+
+#### Parameters:
+
+- template_body: CloudFormation template body
+- service_metadata_parameter_with_stack_name: name of field in Service Metadata with information about Stack name
+- service_metadata_parameter_with_stack_parameters: name of field in Service Metadata with dictionary of parameters for CloudFormation stack
+- stack_parameters: dictionary with parameters for CloudFormation stack common for all services
+
 ### Generate project directory using cookiecutter template
 
 Example:
