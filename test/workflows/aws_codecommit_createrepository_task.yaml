@@ -1,0 +1,4 @@
+steps:
+  - name: step
+    task:
+      type: AWS/CodeCommit/CreateRepository

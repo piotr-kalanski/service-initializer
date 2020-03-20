@@ -1,0 +1,13 @@
+steps:
+  - name: step
+    task:
+      type: AWS/CloudFormation/CreateStack
+      parameters:
+        template_body: >
+          Resources:
+            S3Bucket:
+              Type: AWS::S3::Bucket
+              DeletionPolicy: Retain
+              Properties:
+                BucketName: my-bucket
+        service_metadata_parameter_with_stack_name: cf_stack_name
