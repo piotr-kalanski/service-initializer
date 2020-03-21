@@ -1,0 +1,7 @@
+steps:
+  - name: step
+    task:
+      type: GitHub/CreateRepository
+      parameters:
+        auth_token: TOKEN
+        service_metadata_parameter_with_request_body: create_github_repository_body

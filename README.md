@@ -263,6 +263,26 @@ steps:
 - parameters_field_name: name of field in Service Metadata with input parameters for cookiecutter template
 - output_dir: output directory where to generate project template
 
+### Create GitHub repository
+
+```yaml
+  steps:
+  - name: Step name
+    task:
+      type: GitHub/CreateRepository
+      parameters:
+        auth_token: TOKEN
+        service_metadata_parameter_with_request_body: create_github_repository_body
+  [...]
+```
+
+#### Parameters:
+
+|Parameter|Required?|Description|
+|---|---|---|
+|auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
+|service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
+
 ## Add new task
 
 Required steps:

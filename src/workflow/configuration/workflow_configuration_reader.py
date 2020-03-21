@@ -9,6 +9,7 @@ from tasks.aws.codepipeline import *
 from tasks.aws.ecr import *
 from tasks.aws.cloudformation import *
 from tasks.git import Git_PushToRepository_Task
+from tasks.github import GitHub_CreateRepository_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 
 class WorkflowConfigurationReader:
@@ -21,6 +22,7 @@ class WorkflowConfigurationReader:
         "AWS/CloudFormation/CreateStack": AWS_CloudFormation_CreateStack_Task,
         "git/PushToRepository": Git_PushToRepository_Task,
         'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
+        'GitHub/CreateRepository': GitHub_CreateRepository_Task,
     }
 
     def read(self, file: str) -> WorkflowConfiguration:
