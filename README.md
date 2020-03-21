@@ -235,10 +235,12 @@ Example:
 
 #### Parameters:
 
-- template_body: CloudFormation template body
-- service_metadata_parameter_with_stack_name: name of field in Service Metadata with information about Stack name
-- service_metadata_parameter_with_stack_parameters: name of field in Service Metadata with dictionary of parameters for CloudFormation stack
-- stack_parameters: dictionary with parameters for CloudFormation stack common for all services
+|Parameter|Required?|Description|
+|---|---|---|
+|template_body|YES|CloudFormation template body|
+|service_metadata_parameter_with_stack_name|YES|name of field in Service Metadata with information about Stack name|
+|service_metadata_parameter_with_stack_parameters|NO|name of field in Service Metadata with dictionary of parameters for CloudFormation stack|
+|stack_parameters|NO|dictionary with parameters for CloudFormation stack common for all services|
 
 ### Generate project directory using cookiecutter template
 
@@ -259,9 +261,11 @@ steps:
 
 #### Parameters:
 
-- template_url_field_name: name of field in Service Metadata with url to cookiecutter template
-- parameters_field_name: name of field in Service Metadata with input parameters for cookiecutter template
-- output_dir: output directory where to generate project template
+|Parameter|Required?|Description|
+|---|---|---|
+|template_url_field_name|YES|name of field in Service Metadata with url to cookiecutter template|
+|parameters_field_name|YES|name of field in Service Metadata with input parameters for cookiecutter template|
+|output_dir|YES|output directory where to generate project template|
 
 ### Create GitHub repository
 
@@ -281,7 +285,7 @@ steps:
 |Parameter|Required?|Description|
 |---|---|---|
 |auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
-|service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
+|service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub repository request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
 
 ## Add new task
 
