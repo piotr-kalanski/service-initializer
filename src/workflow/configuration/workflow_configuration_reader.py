@@ -2,6 +2,7 @@ import yaml
 from workflow.configuration.workflow_configuration import WorkflowConfiguration
 from workflow.step import Step
 from workflow.configuration.exceptions import NotExistingTaskException
+from workflow.configuration.secrets_reader import SecretsReader
 
 from tasks.aws.codecommit import *
 from tasks.aws.codepipeline import *
@@ -23,17 +24,57 @@ class WorkflowConfigurationReader:
     }
 
     def read(self, file: str) -> WorkflowConfiguration:
-        configuration_content = yaml.load(open(file), Loader=yaml.FullLoader)
-        wc = WorkflowConfiguration()
+        configuration_content = self.__read_configuration_file(file)
+        secrets = self.__read_secrets(configuration_content)
+        return self.__deserialize_workflow_configuration(
+            steps=configuration_content['steps'],
+            secrets=secrets,
+        )
 
-        for s in configuration_content['steps']:
+    def __read_configuration_file(self, file: str) -> dict:
+        return yaml.load(open(file), Loader=yaml.FullLoader)
+
+    def __read_secrets(self, configuration: dict) -> dict:
+        if 'secrets' in configuration:
+            s = configuration['secrets']
+            secrets_reader = SecretsReader()
+
+            return secrets_reader.read(
+                environment_variables=s['environment'] if 'environment' in s else {},
+                files=s['files'] if 'files' in s else []
+            )
+        else:
+            return {}
+
+    def __transform_parameters(self, parameters: dict, secrets: dict) -> dict:
+
+        def transform_value(v) -> str:
+            result = v
+
+            if type(v) == str and v.startswith('{'):
+                if v.startswith('{secret:'):
+                    secret_key = v.replace('{secret:', '')[:-1]
+                    result = secrets[secret_key]
+
+            return result
+
+        return {
+            k:transform_value(v)
+            for (k,v) in parameters.items()
+        }
+
+    def __deserialize_workflow_configuration(self, steps: List[dict], secrets: dict) -> WorkflowConfiguration:
+        wc = WorkflowConfiguration()
+        for s in steps:
             step_name = s['name']
             task = s['task']
             task_type = task['type']
-            task_parameters = task['parameters'] if 'parameters' in task else {}
-
+            
             if task_type not in self.TASKS_CLASSES:
                 raise NotExistingTaskException()
+
+            task_parameters = task['parameters'] if 'parameters' in task else {}
+            task_parameters = self.__transform_parameters(task_parameters, secrets)
 
             step = Step(
                 name=step_name,

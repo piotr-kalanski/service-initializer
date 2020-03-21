@@ -14,6 +14,7 @@ Tool for initializing new service (e.g. REST API, batch job).
 - [Architecture](#architecture)
 - [Command line](#command-line)
     * [Run workflow](#run-workflow)
+- [Secrets](#secrets)
 - [Supported tasks](#supported-tasks)
 - [Add new task](#add-new-task)
 
@@ -124,6 +125,64 @@ Command to initialize new service based on provided workflow and service metadat
 Example:
 
     python initialize_service.py --configuration workflow_simple.yaml --parameters service_metadata.yaml
+
+## Secrets
+
+You can provide secrets (e.g. token, API key) using environment variables and/or file.
+
+Secrets are defined in Worfklow Configuration file in section *secrets*:
+
+```yaml
+secrets:
+  [...]
+  
+steps:
+  [...]
+```
+
+In Workflow Steps you can provide reference to secret value using syntax: ```{secret:NAME_OF_SECRET}```.
+
+Example:
+
+```yaml
+steps:
+  - name: Step name
+    task:
+      type: TYPE
+      parameters:
+        token: {secret:TOKEN}
+```
+
+### Secrets provided in environment variables
+
+You can provide mapping from name of environment variable to secret name in section ```secrets.environment```.
+
+Example:
+
+```yaml
+secrets:
+  environment:
+    ENVIRONMENT_VARIABLE_NAME: API_KEY
+```
+
+### Secrets provided in file
+
+You can provide list of files with secrets in section ```secrets.files```.
+
+Example:
+
+```yaml
+secrets:
+  files:
+    - /dir1/dir2/secrets1.yaml
+    - /dir1/dir2/secrets2.yaml
+```
+Expected file format with secrets:
+
+```yaml
+secret_key1: value1
+secret_key2: value2
+```
 
 ## Supported tasks
 
