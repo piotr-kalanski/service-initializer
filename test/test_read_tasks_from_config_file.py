@@ -5,7 +5,7 @@ from tasks.aws.codecommit import AWS_CodeCommit_CreateRepository_Task
 from tasks.aws.codepipeline import AWS_CodePipeline_CreatePipeline_Task
 from tasks.aws.ecr import AWS_ECR_CreateRepository_Task
 from tasks.aws.cloudformation import AWS_CloudFormation_CreateStack_Task
-from tasks.git import Git_PushToRepository_Task
+from tasks.git import *
 from tasks.github import GitHub_CreateRepository_Task
 from tasks.docker import Docker_Run_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
@@ -107,6 +107,12 @@ class TestReadingTasksFromConfigFile(unittest.TestCase):
             ],
             task.docker_run_options
         )
+
+    def test_read_git_clonepository_task(self):
+       task = self.__get_first_task_from_workflow_at("test/workflows/git_clonepository_task.yaml")
+       self.assertEqual(Git_CloneRepository_Task, task.__class__)
+       self.assertEqual('target_directory', task.service_metadata_parameter_with_target_directory)
+       self.assertEqual('repository_url', task.service_metadata_parameter_with_repository_url)
 
     def __get_first_task_from_workflow_at(self, file: str):
         wc = self.workflow_configuration_reader.read(file)

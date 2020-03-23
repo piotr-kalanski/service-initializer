@@ -31,10 +31,12 @@ Tool for initializing new service (e.g. REST API, batch job).
       - [Parameters:](#parameters-1)
     - [Create GitHub repository](#create-github-repository)
       - [Parameters:](#parameters-2)
+    - [Clone git repository](#clone-git-repository)
+      - [Parameters:](#parameters-3)
     - [Docker run command](#docker-run-command)
       - [Executed Docker run command](#executed-docker-run-command)
       - [Example in Workflow Configuration](#example-in-workflow-configuration)
-      - [Parameters](#parameters-3)
+      - [Parameters](#parameters-4)
       - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
   - [Add new task](#add-new-task)
     - [Create custom Python class for task](#create-custom-python-class-for-task)
@@ -309,6 +311,26 @@ steps:
 |---|---|---|
 |auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
 |service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub repository request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
+
+### Clone git repository
+
+```yaml
+steps:
+  - name: step
+    task:
+      type: git/CloneRepository
+      parameters:
+        service_metadata_parameter_with_target_directory: target_directory
+        service_metadata_parameter_with_repository_url: repository_url
+[...]
+```
+
+#### Parameters:
+
+|Parameter|Required?|Description|
+|---|---|---|
+|service_metadata_parameter_with_target_directory|YES|name of field in Service Metadata with target directory for git repository|
+|service_metadata_parameter_with_repository_url|YES|name of field in Service Metadata with git repository url|
 
 ### Docker run command
 

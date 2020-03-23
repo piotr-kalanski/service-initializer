@@ -8,7 +8,7 @@ from tasks.aws.codecommit import *
 from tasks.aws.codepipeline import *
 from tasks.aws.ecr import *
 from tasks.aws.cloudformation import *
-from tasks.git import Git_PushToRepository_Task
+from tasks.git import *
 from tasks.github import GitHub_CreateRepository_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 from tasks.docker import Docker_Run_Task
@@ -21,6 +21,7 @@ class WorkflowConfigurationReader:
         "AWS/CodePipeline/CreatePipeline": AWS_CodePipeline_CreatePipeline_Task,
         "AWS/ECR/CreateRepository": AWS_ECR_CreateRepository_Task,
         "AWS/CloudFormation/CreateStack": AWS_CloudFormation_CreateStack_Task,
+        "git/CloneRepository": Git_CloneRepository_Task,
         "git/PushToRepository": Git_PushToRepository_Task,
         'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
         'GitHub/CreateRepository': GitHub_CreateRepository_Task,

@@ -1,0 +1,7 @@
+steps:
+  - name: step
+    task:
+      type: git/CloneRepository
+      parameters:
+        service_metadata_parameter_with_target_directory: target_directory
+        service_metadata_parameter_with_repository_url: repository_url
