@@ -24,12 +24,10 @@ class TestWorkflowConfigurationReader(unittest.TestCase):
         self.assertEqual("Step1", steps[0].name)
         self.assertEqual("Step2", steps[1].name)
         self.assertEqual("Step3", steps[2].name)
-        self.assertEqual("Step4", steps[3].name)
 
         self.assertEqual(AWS_CodeCommit_CreateRepository_Task, steps[0].task.__class__)
         self.assertEqual(AWS_CodePipeline_CreatePipeline_Task, steps[1].task.__class__)
         self.assertEqual(AWS_ECR_CreateRepository_Task, steps[2].task.__class__)
-        self.assertEqual(Git_PushToRepository_Task, steps[3].task.__class__)
 
     def test_read_workflow_with_not_existing_task(self):
         with pytest.raises(NotExistingTaskException):

@@ -108,11 +108,16 @@ class TestReadingTasksFromConfigFile(unittest.TestCase):
             task.docker_run_options
         )
 
-    def test_read_git_clonepository_task(self):
-       task = self.__get_first_task_from_workflow_at("test/workflows/git_clonepository_task.yaml")
+    def test_read_git_clonerepository_task(self):
+       task = self.__get_first_task_from_workflow_at("test/workflows/git_clonerepository_task.yaml")
        self.assertEqual(Git_CloneRepository_Task, task.__class__)
        self.assertEqual('target_directory', task.service_metadata_parameter_with_target_directory)
        self.assertEqual('repository_url', task.service_metadata_parameter_with_repository_url)
+
+    def test_read_git_pushtorepository_task(self):
+       task = self.__get_first_task_from_workflow_at("test/workflows/git_pushtopository_task.yaml")
+       self.assertEqual(Git_PushToRepository_Task, task.__class__)
+       self.assertEqual('path_of_git_repository', task.service_metadata_parameter_with_path_of_git_repository)
 
     def __get_first_task_from_workflow_at(self, file: str):
         wc = self.workflow_configuration_reader.read(file)

@@ -33,10 +33,12 @@ Tool for initializing new service (e.g. REST API, batch job).
       - [Parameters:](#parameters-2)
     - [Clone git repository](#clone-git-repository)
       - [Parameters:](#parameters-3)
+    - [Push all new files to git repository](#push-all-new-files-to-git-repository)
+      - [Parameters:](#parameters-4)
     - [Docker run command](#docker-run-command)
       - [Executed Docker run command](#executed-docker-run-command)
       - [Example in Workflow Configuration](#example-in-workflow-configuration)
-      - [Parameters](#parameters-4)
+      - [Parameters](#parameters-5)
       - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
   - [Add new task](#add-new-task)
     - [Create custom Python class for task](#create-custom-python-class-for-task)
@@ -331,6 +333,24 @@ steps:
 |---|---|---|
 |service_metadata_parameter_with_target_directory|YES|name of field in Service Metadata with target directory for git repository|
 |service_metadata_parameter_with_repository_url|YES|name of field in Service Metadata with git repository url|
+
+### Push all new files to git repository
+
+```yaml
+steps:
+  - name: step
+    task:
+      type: git/PushToRepository
+      parameters:
+        service_metadata_parameter_with_path_of_git_repository: path_of_git_repository
+[...]
+```
+
+#### Parameters:
+
+|Parameter|Required?|Description|
+|---|---|---|
+|service_metadata_parameter_with_path_of_git_repository|YES|name of field in Service Metadata with path of git repository|
 
 ### Docker run command
 

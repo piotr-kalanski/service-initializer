@@ -8,6 +8,3 @@ steps:
   - name: Step3
     task:
       type: AWS/ECR/CreateRepository
-  - name: Step4
-    task:
-      type: git/PushToRepository

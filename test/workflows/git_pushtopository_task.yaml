@@ -1,0 +1,6 @@
+steps:
+  - name: step
+    task:
+      type: git/PushToRepository
+      parameters:
+        service_metadata_parameter_with_path_of_git_repository: path_of_git_repository
