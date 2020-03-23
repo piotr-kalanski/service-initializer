@@ -7,6 +7,7 @@ from tasks.aws.ecr import AWS_ECR_CreateRepository_Task
 from tasks.aws.cloudformation import AWS_CloudFormation_CreateStack_Task
 from tasks.git import Git_PushToRepository_Task
 from tasks.github import GitHub_CreateRepository_Task
+from tasks.docker import Docker_Run_Task
 
 class TestReadingTasksFromConfigFile(unittest.TestCase):
 
@@ -65,6 +66,26 @@ class TestReadingTasksFromConfigFile(unittest.TestCase):
         self.assertEqual(GitHub_CreateRepository_Task, task.__class__)
         self.assertEqual('TOKEN', task.auth_token)
         self.assertEqual('create_github_repository_body', task.service_metadata_parameter_with_request_body)
+
+    def test_read_docker_run_task(self):
+        task = self.__get_first_task_from_workflow_at("test/workflows/docker_run_task.yaml")
+        self.assertEqual(Docker_Run_Task, task.__class__)
+        self.assertEqual('piotrkalanski/service-initializer-cookiecutter-task', task.docker_image)
+        self.assertEqual(
+            {
+                'template_url_field_name':'template_url',
+                'output_dir':'/output/',
+                'parameters_field_name':'params'
+            },
+            task.task_parameters
+        )
+        self.assertEqual([
+                '-v dir1:dir2',
+                'option2',
+                'option3',
+            ],
+            task.docker_run_options
+        )
 
     def __get_first_task_from_workflow_at(self, file: str):
         wc = self.workflow_configuration_reader.read(file)

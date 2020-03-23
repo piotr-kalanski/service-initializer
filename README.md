@@ -287,13 +287,69 @@ steps:
 |auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
 |service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub repository request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
 
+### Docker run task
+
+Generic task for running task using Docker image for task.
+
+#### Executed Docker run command
+
+This task executes docker command using below template:
+
+  docker run -it --rm CUSTOM_DOCKER_OPTIONS --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "CUSTOM_TASK_PARAMETERS" --service-metadata "SERVICE_METADATA.parameters"
+
+where:
+- ``SERVICE_METADATA.name.*`` are fields values from (Service Metadata)[#service-metadata]
+- ``CUSTOM_DOCKER_OPTIONS`` is custom Docker run options that can be provided in Workflow Configuration file
+- ``CUSTOM_TASK_PARAMETERS`` is custom task parameters that can be provided in Workflow Configuration file
+
+#### Example in Workflow Configuration
+
+```yaml
+  steps:
+  - name: Step name
+    task:
+      type: Docker/Run
+      parameters:
+        docker_image: piotrkalanski/service-initializer-cookiecutter-task
+        task_parameters:
+          template_url_field_name: 'template_url'
+          output_dir: '/output/'
+          parameters_field_name: 'params'
+        docker_run_options:
+          - '-v generated_project:/output'
+  [...]
+```
+Based on above configuration following command will be executed:
+
+  docker run -it --rm -v generated_project:/output piotrkalanski/service-initializer-cookiecutter-task --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "{'template_url_field_name': 'template_url', 'output_dir': '/output/', 'parameters_field_name': 'params'}" --service-metadata "SERVICE_METADATA.parameters"
+
+#### Parameters
+
+|Parameter|Required?|Description|
+|---|---|---|
+|docker_image|YES|Docker image|
+|task_parameters|YES|Dictionary of custom parameters for your task|
+|docker_run_options|NO|Additional Docker command options e.g. for mapping volume|
+
+#### Create custom Docker image for your task
+
+To create custom Docker image for new task you can use base Docker image: [piotr-kalanski/service-initializer-base-docker](#https://github.com/piotr-kalanski/service-initializer-base-docker).
+
+You can find example task using Docker image here: https://github.com/piotr-kalanski/service-initializer-cookiecutter-task.
+
 ## Add new task
+
+There are two methods for adding new tasks:
+1. Create custom Python class for task
+2. Use generic [Docker run task](#docker-run-task)
+
+### Create custom Python class for task
 
 Required steps:
 1. Create new Python class
 2. Add mapping from expected task type name to Task class in [WorkflowConfigurationReader](./src/workflow/configuration/workflow_configuration_reader.py).
 
-### Create new Python class
+#### Create new Python class
 
 Create new Python class derived from *AbstractTask* class.
 
@@ -312,7 +368,7 @@ class New_Task(AbstractTask):
         # TODO - implementation
 ```
 
-### Add mapping from expected task type name to Task class
+#### Add mapping from expected task type name to Task class
 
 Add new mapping in [WorkflowConfigurationReader](./src/workflow/configuration/workflow_configuration_reader.py):
 

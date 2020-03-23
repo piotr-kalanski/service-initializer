@@ -11,6 +11,7 @@ from tasks.aws.cloudformation import *
 from tasks.git import Git_PushToRepository_Task
 from tasks.github import GitHub_CreateRepository_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
+from tasks.docker import Docker_Run_Task
 
 class WorkflowConfigurationReader:
 
@@ -23,6 +24,7 @@ class WorkflowConfigurationReader:
         "git/PushToRepository": Git_PushToRepository_Task,
         'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
         'GitHub/CreateRepository': GitHub_CreateRepository_Task,
+        'Docker/Run': Docker_Run_Task,
     }
 
     def read(self, file: str) -> WorkflowConfiguration:
