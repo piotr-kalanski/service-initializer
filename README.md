@@ -403,7 +403,7 @@ Based on above configuration following command will be executed:
 
 #### Create custom Docker image for your task
 
-To create custom Docker image for new task you can use base Docker image: [piotr-kalanski/service-initializer-base-docker](#https://github.com/piotr-kalanski/service-initializer-base-docker).
+To create custom Docker image for new task you can use base Docker image: (piotr-kalanski/service-initializer-base-docker)[#https://github.com/piotr-kalanski/service-initializer-base-docker].
 
 You can find example task using Docker image here: https://github.com/piotr-kalanski/service-initializer-cookiecutter-task.
 
