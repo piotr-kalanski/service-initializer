@@ -4,19 +4,42 @@ Tool for initializing new service (e.g. REST API, batch job).
 
 ## Table of contents
 
-- [Motivation](#motivation)
-- [Quick start](#quick-start)
-- [Concepts](#concepts)
-    * [Task](#task)
-    * [Step](#step)
-    * [Workflow configuration](#workflow-configuration)
-    * [Service metadata](#service-metadata)    
-- [Architecture](#architecture)
-- [Command line](#command-line)
-    * [Run workflow](#run-workflow)
-- [Secrets](#secrets)
-- [Supported tasks](#supported-tasks)
-- [Add new task](#add-new-task)
+- [service-initializer](#service-initializer)
+  - [Table of contents](#table-of-contents)
+  - [Motivation](#motivation)
+    - [Benefits](#benefits)
+  - [Quick start](#quick-start)
+  - [Concepts](#concepts)
+    - [Task](#task)
+    - [Step](#step)
+    - [Workflow configuration](#workflow-configuration)
+      - [Example workflow configuration file](#example-workflow-configuration-file)
+    - [Service metadata](#service-metadata)
+      - [Example service metadata file](#example-service-metadata-file)
+  - [Architecture](#architecture)
+  - [Command line](#command-line)
+    - [Run workflow](#run-workflow)
+  - [Secrets](#secrets)
+    - [Secrets provided in environment variables](#secrets-provided-in-environment-variables)
+    - [Secrets provided in file](#secrets-provided-in-file)
+  - [Supported tasks](#supported-tasks)
+    - [Create AWS Code Commit repository](#create-aws-code-commit-repository)
+    - [Create ECR repository](#create-ecr-repository)
+    - [Create AWS CloudFormation stack](#create-aws-cloudformation-stack)
+      - [Parameters:](#parameters)
+    - [Generate project directory using cookiecutter template](#generate-project-directory-using-cookiecutter-template)
+      - [Parameters:](#parameters-1)
+    - [Create GitHub repository](#create-github-repository)
+      - [Parameters:](#parameters-2)
+    - [Docker run command](#docker-run-command)
+      - [Executed Docker run command](#executed-docker-run-command)
+      - [Example in Workflow Configuration](#example-in-workflow-configuration)
+      - [Parameters](#parameters-3)
+      - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
+  - [Add new task](#add-new-task)
+    - [Create custom Python class for task](#create-custom-python-class-for-task)
+      - [Create new Python class](#create-new-python-class)
+      - [Add mapping from expected task type name to Task class](#add-mapping-from-expected-task-type-name-to-task-class)
 
 ## Motivation
 
@@ -287,7 +310,7 @@ steps:
 |auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
 |service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub repository request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
 
-### Docker run task
+### Docker run command
 
 Generic task for running task using Docker image for task.
 
@@ -295,7 +318,7 @@ Generic task for running task using Docker image for task.
 
 This task executes docker command using below template:
 
-  docker run -it --rm CUSTOM_DOCKER_OPTIONS --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "CUSTOM_TASK_PARAMETERS" --service-metadata "SERVICE_METADATA.parameters"
+    docker run -it --rm CUSTOM_DOCKER_OPTIONS --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "CUSTOM_TASK_PARAMETERS" --service-metadata "SERVICE_METADATA.parameters"
 
 where:
 - ``SERVICE_METADATA.name.*`` are fields values from (Service Metadata)[#service-metadata]
@@ -321,7 +344,7 @@ where:
 ```
 Based on above configuration following command will be executed:
 
-  docker run -it --rm -v generated_project:/output piotrkalanski/service-initializer-cookiecutter-task --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "{'template_url_field_name': 'template_url', 'output_dir': '/output/', 'parameters_field_name': 'params'}" --service-metadata "SERVICE_METADATA.parameters"
+    docker run -it --rm -v generated_project:/output piotrkalanski/service-initializer-cookiecutter-task --name SERVICE_METADATA.name --description "SERVICE_METADATA.description" --parameters "{'template_url_field_name': 'template_url', 'output_dir': '/output/', 'parameters_field_name': 'params'}" --service-metadata "SERVICE_METADATA.parameters"
 
 #### Parameters
 
@@ -341,7 +364,7 @@ You can find example task using Docker image here: https://github.com/piotr-kala
 
 There are two methods for adding new tasks:
 1. Create custom Python class for task
-2. Use generic [Docker run task](#docker-run-task)
+2. Use generic [Docker task](#create-custom-docker-image-for-your-task)
 
 ### Create custom Python class for task
 
