@@ -63,10 +63,10 @@ Benefits of Service Initializer:
       - [Example in Workflow Configuration](#example-in-workflow-configuration)
       - [Parameters](#parameters-5)
   - [Add new task](#add-new-task)
-    - [Create custom Python class for task](#create-custom-python-class-for-task)
+    - [Method 1 - Create custom Python class for task](#method-1---create-custom-python-class-for-task)
       - [Create new Python class](#create-new-python-class)
       - [Add mapping from expected task type name to Task class](#add-mapping-from-expected-task-type-name-to-task-class)
-    - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
+    - [Method 2 - Create custom Docker image for your task](#method-2---create-custom-docker-image-for-your-task)
 
 ## Quick start
 
@@ -404,10 +404,10 @@ Based on above configuration following command will be executed:
 ## Add new task
 
 There are two methods for adding new tasks:
-1. Create custom Python class for task
-2. Use generic [Docker task](#create-custom-docker-image-for-your-task)
+1. [Method 1](#method-1---create-custom-python-class-for-task) - Create custom Python class for task
+2. [Method 2](#method-2---create-custom-docker-image-for-your-task) - Use generic [Docker task](#create-custom-docker-image-for-your-task)
 
-### Create custom Python class for task
+### Method 1 - Create custom Python class for task
 
 Required steps:
 1. Create new Python class
@@ -458,7 +458,7 @@ steps:
       type: NewTask
 ```
 
-###  Create custom Docker image for your task
+### Method 2 - Create custom Docker image for your task
 
 To create custom Docker image for new task you can use base Docker image: [piotr-kalanski/service-initializer-base-docker](https://github.com/piotr-kalanski/service-initializer-base-docker).
 
