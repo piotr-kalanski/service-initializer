@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Tool for initializing new service (e.g. REST API, batch job).
+Service Initializer is tool to initialize new service (e.g. REST API, batch job, data pipeline).
+
+You can use Service Initializer to create standard workflows for initializing new services in your organization using multiple builtin tasks and/or your custom tasks.
 
 [![License](http://img.shields.io/:license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 [![CI status](https://github.com/piotr-kalanski/service-initializer/workflows/CI%20workflow/badge.svg)](https://github.com/piotr-kalanski/service-initializer/actions)
@@ -18,11 +20,11 @@ Aim of Service Initializer is to automate such tasks so that you can start from 
 Benefits of Service Initializer:
 - Reduce time spent on boring and repetitive tasks
 - Support microservice architecture in your organization by reducing overhead on creating new service
-- Increase standardization in your team/organization
-- Speed up induction process of new developer in your team
+- Increase standardization in your organization
+- Speed up induction process of new developer in your organization
 - Technology and platform agnostic - you can use it to initialize any tech stack
-- Built in tasks ([see more](#supported-tasks))
-- Extensibility - it is relativly easy to add support for automating new type of tasks ([see more](#add-new-task))
+- Many built in tasks ([see more](#supported-tasks))
+- Extensibility - it is relatively easy to add support for automating new type of tasks ([see more](#add-new-task))
 
 ## Table of contents
 
