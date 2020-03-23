@@ -8,6 +8,8 @@ from tasks.aws.cloudformation import AWS_CloudFormation_CreateStack_Task
 from tasks.git import Git_PushToRepository_Task
 from tasks.github import GitHub_CreateRepository_Task
 from tasks.docker import Docker_Run_Task
+from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
+
 
 class TestReadingTasksFromConfigFile(unittest.TestCase):
 
@@ -83,6 +85,25 @@ class TestReadingTasksFromConfigFile(unittest.TestCase):
                 '-v dir1:dir2',
                 'option2',
                 'option3',
+            ],
+            task.docker_run_options
+        )
+
+    def test_read_cookiecutter_generateprojectdirectory_task(self):
+        task = self.__get_first_task_from_workflow_at("test/workflows/cookiecutter_generateprojectdirectory_task.yaml")
+        
+        self.assertEqual(Cookiecutter_GenerateProjectDirectory_Task, task.__class__)
+        self.assertEqual('piotrkalanski/service-initializer-cookiecutter-task', task.docker_image)
+        self.assertEqual(
+            {
+                'template_url_field_name': 'template_url',
+                'output_dir':'/output/',
+                'parameters_field_name': 'cookiecutter_parameters',
+            },
+            task.task_parameters
+        )
+        self.assertEqual([
+                '-v /tmp/output/:/output',
             ],
             task.docker_run_options
         )

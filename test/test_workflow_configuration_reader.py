@@ -35,16 +35,6 @@ class TestWorkflowConfigurationReader(unittest.TestCase):
         with pytest.raises(NotExistingTaskException):
             self.workflow_configuration_reader.read("test/workflows/workflow_with_not_existing_task.yaml")
 
-    def test_read_workflow_containing_task_with_parameters(self):
-        wc = self.workflow_configuration_reader.read("test/workflows/workflow_task_with_parameters.yaml")
-
-        steps = wc.get_steps()
-        task = steps[0].task
-
-        self.assertEqual('cookiecutter.template_url', task.template_url_field_name)
-        self.assertEqual('cookiecutter.parameters', task.parameters_field_name)
-        self.assertEqual('dir1/dir2', task.output_dir)
-
     def test_read_workflow_with_secrets(self):
         os.environ['ENVIRONMENT_VARIABLE'] = 'SECRET_VALUE'
 
@@ -53,5 +43,5 @@ class TestWorkflowConfigurationReader(unittest.TestCase):
         steps = wc.get_steps()
         task = steps[0].task
 
-        self.assertEqual('SECRET_VALUE', task.template_url_field_name)
-        self.assertEqual('value1', task.parameters_field_name)
+        self.assertEqual('SECRET_VALUE', task.auth_token)
+        self.assertEqual('value1', task.service_metadata_parameter_with_request_body)

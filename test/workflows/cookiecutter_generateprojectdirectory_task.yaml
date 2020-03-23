@@ -1,0 +1,8 @@
+steps:
+  - name: step
+    task:
+      type: Cookiecutter/GenerateProjectDirectory
+      parameters:
+        template_url_field_name: template_url
+        parameters_field_name: cookiecutter_parameters
+        output_dir: /tmp/output/
