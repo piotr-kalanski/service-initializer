@@ -49,24 +49,24 @@ Benefits of Service Initializer:
     - [Create AWS Code Commit repository](#create-aws-code-commit-repository)
     - [Create ECR repository](#create-ecr-repository)
     - [Create AWS CloudFormation stack](#create-aws-cloudformation-stack)
-      - [Parameters:](#parameters)
+      - [Parameters](#parameters)
     - [Generate project directory using cookiecutter template](#generate-project-directory-using-cookiecutter-template)
-      - [Parameters:](#parameters-1)
+      - [Parameters](#parameters-1)
     - [Create GitHub repository](#create-github-repository)
-      - [Parameters:](#parameters-2)
+      - [Parameters](#parameters-2)
     - [Clone git repository](#clone-git-repository)
-      - [Parameters:](#parameters-3)
+      - [Parameters](#parameters-3)
     - [Push all new files to git repository](#push-all-new-files-to-git-repository)
-      - [Parameters:](#parameters-4)
+      - [Parameters](#parameters-4)
     - [Docker run command](#docker-run-command)
       - [Executed Docker run command](#executed-docker-run-command)
       - [Example in Workflow Configuration](#example-in-workflow-configuration)
       - [Parameters](#parameters-5)
-      - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
   - [Add new task](#add-new-task)
     - [Create custom Python class for task](#create-custom-python-class-for-task)
       - [Create new Python class](#create-new-python-class)
       - [Add mapping from expected task type name to Task class](#add-mapping-from-expected-task-type-name-to-task-class)
+    - [Create custom Docker image for your task](#create-custom-docker-image-for-your-task)
 
 ## Quick start
 
@@ -265,7 +265,7 @@ Example:
   [...]
 ```
 
-#### Parameters:
+#### Parameters
 
 |Parameter|Required?|Description|
 |---|---|---|
@@ -291,7 +291,7 @@ steps:
   [...]
 ```
 
-#### Parameters:
+#### Parameters
 
 |Parameter|Required?|Description|
 |---|---|---|
@@ -312,7 +312,7 @@ steps:
   [...]
 ```
 
-#### Parameters:
+#### Parameters
 
 |Parameter|Required?|Description|
 |---|---|---|
@@ -332,7 +332,7 @@ steps:
 [...]
 ```
 
-#### Parameters:
+#### Parameters
 
 |Parameter|Required?|Description|
 |---|---|---|
@@ -351,7 +351,7 @@ steps:
 [...]
 ```
 
-#### Parameters:
+#### Parameters
 
 |Parameter|Required?|Description|
 |---|---|---|
@@ -400,12 +400,6 @@ Based on above configuration following command will be executed:
 |docker_image|YES|Docker image|
 |task_parameters|YES|Dictionary of custom parameters for your task|
 |docker_run_options|NO|Additional Docker command options e.g. for mapping volume|
-
-#### Create custom Docker image for your task
-
-To create custom Docker image for new task you can use base Docker image: [piotr-kalanski/service-initializer-base-docker](https://github.com/piotr-kalanski/service-initializer-base-docker).
-
-You can find example task using Docker image here: https://github.com/piotr-kalanski/service-initializer-cookiecutter-task.
 
 ## Add new task
 
@@ -463,3 +457,11 @@ steps:
     task:
       type: NewTask
 ```
+
+###  Create custom Docker image for your task
+
+To create custom Docker image for new task you can use base Docker image: [piotr-kalanski/service-initializer-base-docker](https://github.com/piotr-kalanski/service-initializer-base-docker).
+
+You can find example task using Docker image here: https://github.com/piotr-kalanski/service-initializer-cookiecutter-task.
+
+Then you can execute your custom task using [Docker/Run](#docker-run-command) task.
