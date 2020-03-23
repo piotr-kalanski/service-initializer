@@ -125,9 +125,9 @@ Above workflow has four steps:
 Service metadata is list of parameters that are provided when running workflow and can be input to tasks.
 
 Service metadata schema:
-- name - service name
-- description - service description
-- parameters - key value pairs
+- ``name`` - service name
+- ``description`` - service description
+- ``parameters`` - key value pairs
 
 #### Example service metadata file
 
@@ -428,7 +428,7 @@ from service_metadata.model import ServiceMetadata
 class New_Task(AbstractTask):
     
     def execute(self, service_metadata: ServiceMetadata):
-        logging.info("Pushing to git repository")
+        logging.info("Your message")
         # TODO - implementation
 ```
 
@@ -449,7 +449,7 @@ class WorkflowConfigurationReader:
 
 ```
 
-where *NewTask* is used in workflow configuration file, example:
+where ``NewTask`` is used in workflow configuration file, example:
 
 ```yaml
 steps:
