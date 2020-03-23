@@ -1,13 +1,36 @@
 # service-initializer
 
+## Introduction
+
 Tool for initializing new service (e.g. REST API, batch job).
+
+[![License](http://img.shields.io/:license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+[![CI status](https://github.com/piotr-kalanski/service-initializer/workflows/CI%20workflow/badge.svg)](https://github.com/piotr-kalanski/service-initializer/actions)
+
+## Motivation
+
+When you start working on new Microservice you have to in each case do multiple repetitive and boring things like: create git repository, create basic directory structure in git repository, create CI/CD pipeline, create docker registry etc.
+
+Aim of Service Initializer is to automate such tasks so that you can start from implementing business logic.
+
+### Benefits
+
+Benefits of Service Initializer:
+- Reduce time spent on boring and repetitive tasks
+- Support microservice architecture in your organization by reducing overhead on creating new service
+- Increase standardization in your team/organization
+- Speed up induction process of new developer in your team
+- Technology and platform agnostic - you can use it to initialize any tech stack
+- Built in tasks ([see more](#supported-tasks))
+- Extensibility - it is relativly easy to add support for automating new type of tasks ([see more](#add-new-task))
 
 ## Table of contents
 
 - [service-initializer](#service-initializer)
-  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
   - [Motivation](#motivation)
     - [Benefits](#benefits)
+  - [Table of contents](#table-of-contents)
   - [Quick start](#quick-start)
   - [Concepts](#concepts)
     - [Task](#task)
@@ -44,24 +67,6 @@ Tool for initializing new service (e.g. REST API, batch job).
     - [Create custom Python class for task](#create-custom-python-class-for-task)
       - [Create new Python class](#create-new-python-class)
       - [Add mapping from expected task type name to Task class](#add-mapping-from-expected-task-type-name-to-task-class)
-
-## Motivation
-
-When you start working on new Microservice you have to in each case do multiple repetitive and boring things like: create git repository, create basic directory structure in git repository, create CI/CD pipeline, create docker registry etc.
-
-Aim of Service Initializer is to automate such tasks so that you can start from implementing business logic.
-
-### Benefits
-
-Benefits of Service Initializer:
-- Reduce time spent on boring and repetitive tasks
-- Support microservice architecture in your organization by reducing overhead on creating new service
-- Increase standardization in your team/organization
-- Speed up induction process of new developer in your team
-- Technology and platform agnostic - you can use it to initialize any tech stack
-- Built in tasks ([see more](#supported-tasks))
-- Extensibility - it is relativly easy to add support for automating new type of tasks ([see more](#add-new-task))
-
 
 ## Quick start
 
