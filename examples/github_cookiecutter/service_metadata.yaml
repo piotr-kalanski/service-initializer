@@ -1,0 +1,16 @@
+create_github_repository_body:
+  name: si-python-example
+  description: Service description
+  auto_init: true
+
+cookiecutter_template_url: https://github.com/piotr-kalanski/cookiecutter-template-python.git
+
+cookiecutter_parameters:
+    main_directory: service_xyz
+    main_python_package: organization
+
+target_directory: 'C:\generated_project'
+
+git_repository_url: https://github.com/piotr-kalanski/si-python-example.git
+
+path_of_git_repository: 'C:\generated_project\si-python-example\.git'

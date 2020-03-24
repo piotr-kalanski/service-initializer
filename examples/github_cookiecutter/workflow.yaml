@@ -1,0 +1,29 @@
+secrets:
+  environment:
+    GITHUB_AUTH_TOKEN: AUTH_TOKEN
+
+steps:
+  - name: Create GitHub repository
+    task:
+      type: GitHub/CreateRepository
+      parameters:
+        auth_token: {secret:AUTH_TOKEN}
+        service_metadata_parameter_with_request_body: create_github_repository_body
+  - name: Clone git repository
+    task:
+      type: git/CloneRepository
+      parameters:
+        service_metadata_parameter_with_target_directory: target_directory
+        service_metadata_parameter_with_repository_url: git_repository_url        
+  - name: Generate directory structure template
+    task:
+      type: Cookiecutter/GenerateProjectDirectory
+      parameters:
+        template_url_field_name: cookiecutter_template_url
+        parameters_field_name: cookiecutter_parameters
+        output_dir: 'C:\generated_project'
+  - name: Push to git repository
+    task:
+      type: git/PushToRepository
+      parameters:
+        service_metadata_parameter_with_path_of_git_repository: path_of_git_repository
