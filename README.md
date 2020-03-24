@@ -56,14 +56,16 @@ Benefits of Service Initializer:
       - [Parameters](#parameters-1)
     - [Create GitHub repository](#create-github-repository)
       - [Parameters](#parameters-2)
-    - [Clone git repository](#clone-git-repository)
+    - [Create GitLab project](#create-gitlab-project)
       - [Parameters](#parameters-3)
-    - [Push all new files to git repository](#push-all-new-files-to-git-repository)
+    - [Clone git repository](#clone-git-repository)
       - [Parameters](#parameters-4)
+    - [Push all new files to git repository](#push-all-new-files-to-git-repository)
+      - [Parameters](#parameters-5)
     - [Docker run command](#docker-run-command)
       - [Executed Docker run command](#executed-docker-run-command)
       - [Example in Workflow Configuration](#example-in-workflow-configuration)
-      - [Parameters](#parameters-5)
+      - [Parameters](#parameters-6)
   - [Add new task](#add-new-task)
     - [Method 1 - Create custom Python class for task](#method-1---create-custom-python-class-for-task)
       - [Create new Python class](#create-new-python-class)
@@ -320,6 +322,26 @@ steps:
 |---|---|---|
 |auth_token|YES|Authentication token for GitHub API (https://developer.github.com/v3/#authentication)|
 |service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitHub repository request body (https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user)|
+
+### Create GitLab project
+
+```yaml
+  steps:
+  - name: step
+    task:
+      type: GitLab/CreateProject
+      parameters:
+        personal_token: TOKEN
+        service_metadata_parameter_with_request_body: create_gitlab_project_body
+  [...]
+```
+
+#### Parameters
+
+|Parameter|Required?|Description|
+|---|---|---|
+|personal_token|YES|Authentication token for GitLab API (https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#creating-a-personal-access-token)|
+|service_metadata_parameter_with_request_body|YES|Name of parameter in Service Metadata with create GitLab repository request body (https://docs.gitlab.com/ee/api/projects.html#create-project)|
 
 ### Clone git repository
 

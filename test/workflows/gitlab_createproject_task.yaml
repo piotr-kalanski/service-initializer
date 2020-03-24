@@ -1,0 +1,7 @@
+steps:
+  - name: step
+    task:
+      type: GitLab/CreateProject
+      parameters:
+        personal_token: TOKEN
+        service_metadata_parameter_with_request_body: create_gitlab_project_body

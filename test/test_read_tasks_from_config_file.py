@@ -7,6 +7,7 @@ from tasks.aws.ecr import AWS_ECR_CreateRepository_Task
 from tasks.aws.cloudformation import AWS_CloudFormation_CreateStack_Task
 from tasks.git import *
 from tasks.github import GitHub_CreateRepository_Task
+from tasks.gitlab import GitLab_CreateProject_Task
 from tasks.docker import Docker_Run_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 
@@ -68,6 +69,13 @@ class TestReadingTasksFromConfigFile(unittest.TestCase):
         self.assertEqual(GitHub_CreateRepository_Task, task.__class__)
         self.assertEqual('TOKEN', task.auth_token)
         self.assertEqual('create_github_repository_body', task.service_metadata_parameter_with_request_body)
+
+    def test_read_gitlab_createproject_task(self):
+        task = self.__get_first_task_from_workflow_at("test/workflows/gitlab_createproject_task.yaml")
+        
+        self.assertEqual(GitLab_CreateProject_Task, task.__class__)
+        self.assertEqual('TOKEN', task.personal_token)
+        self.assertEqual('create_gitlab_project_body', task.service_metadata_parameter_with_request_body)        
 
     def test_read_docker_run_task(self):
         task = self.__get_first_task_from_workflow_at("test/workflows/docker_run_task.yaml")

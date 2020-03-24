@@ -10,6 +10,7 @@ from tasks.aws.ecr import *
 from tasks.aws.cloudformation import *
 from tasks.git import *
 from tasks.github import GitHub_CreateRepository_Task
+from tasks.gitlab import GitLab_CreateProject_Task
 from tasks.cookiecutter import Cookiecutter_GenerateProjectDirectory_Task
 from tasks.docker import Docker_Run_Task
 
@@ -23,8 +24,9 @@ class WorkflowConfigurationReader:
         "AWS/CloudFormation/CreateStack": AWS_CloudFormation_CreateStack_Task,
         "git/CloneRepository": Git_CloneRepository_Task,
         "git/PushToRepository": Git_PushToRepository_Task,
-        'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
         'GitHub/CreateRepository': GitHub_CreateRepository_Task,
+        'GitLab/CreateProject': GitLab_CreateProject_Task,
+        'Cookiecutter/GenerateProjectDirectory': Cookiecutter_GenerateProjectDirectory_Task,
         'Docker/Run': Docker_Run_Task,
     }
 
